@@ -6,7 +6,7 @@ from kivy.core.window import Window
 
 Builder.load_file("calcUI.kv") 
 
-Window.size = (500, 700)
+Window.size = (600, 750)
 #Window.minimum_width, Window.minimum_height = Window.size #this line of code is not working. I don't know why.
 
 class CalcLayout(Widget):
