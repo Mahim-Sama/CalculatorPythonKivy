@@ -16,6 +16,7 @@ class CalcLayout(Widget):
         self.prior_button = None
         self.prior = None
     
+    #AC button
     def clear(self):
         self.ids.calc_input.text = "0"
     
@@ -25,12 +26,16 @@ class CalcLayout(Widget):
         self.prior = self.ids.calc_input.text
         if "Error" in self.prior:
             self.prior = ""
-        if self.prior_button == "=" or self.prior_button == "%":
-            self.ids.calc_input.text = ""
-            self.ids.calc_input.text = f"{button}" 
         if self.prior == "0":
             self.ids.calc_input.text = ""
             self.ids.calc_input.text = f"{button}"
+        #else:
+        #    self.ids.calc_input.text = f"{self.prior}{button}"
+        elif self.prior_button is not None:
+        #elif self.prior == "0" or self.prior_button is not None:
+            self.ids.calc_input.text = ""
+            self.ids.calc_input.text = f"{button}"
+            self.prior_button = None
         else:
             self.ids.calc_input.text = f"{self.prior}{button}"
             
@@ -59,6 +64,7 @@ class CalcLayout(Widget):
         else:
             self.prior = f'{self.prior}'
             self.ids.calc_input.text = self.prior
+        self.prior_button = self.ids.calc_input.text
     
     def percentage(self):
         self.prior = self.ids.calc_input.text
@@ -67,10 +73,7 @@ class CalcLayout(Widget):
             self.ids.calc_input.text = str(answer)
         except:
             self.ids.calc_input.text = "Error"
-        self.prior_button = '%'
-        
-        #return answer
-    #percentage = percentage()
+        #self.prior_button = self.ids.calc_input.text
         
     def pos_neg(self):
         self.prior = self.ids.calc_input.text
@@ -81,8 +84,11 @@ class CalcLayout(Widget):
     
     def delete(self):
         self.prior = self.ids.calc_input.text
-        self.prior = self.prior[:-1]
-        self.ids.calc_input.text = self.prior
+        if self.prior == "0":
+            pass
+        else:
+            self.prior = self.prior[:-1]
+            self.ids.calc_input.text = self.prior
         
     def equals(self):
         self.prior = self.ids.calc_input.text
@@ -92,10 +98,9 @@ class CalcLayout(Widget):
             self.ids.calc_input.text = str(answer)
         except:
             self.ids.calc_input.text = "Error"
-        self.prior_button = '='
-        #return answer
+        self.prior_button = self.ids.calc_input.text
     
-    #equals = equals()
+    
 
 class CalculatorApp(App):
     def build(self):
@@ -103,7 +108,6 @@ class CalculatorApp(App):
 
 if __name__ == "__main__":
     CalculatorApp().run()
-    
 
 
 '''overkill lines of code'''    
