@@ -5,7 +5,8 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 
 Builder.load_file("calcUI.kv") 
-
+Window.minimum_width = 600
+Window.minimum_height = 750
 Window.size = (600, 750)
 #Window.minimum_width, Window.minimum_height = Window.size #this line of code is not working. I don't know why.
 
